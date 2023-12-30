@@ -77,6 +77,7 @@ const largestSrc = ($imageElem) => {
 
 const processContent = (post, siteUrl, options) => {
     const {substackPodcastURL} = post;
+    const voiceover = post.data?.voiceover;
     const {useMetaImage, useFirstImage} = options;
 
     let html = post.data?.html;
@@ -155,13 +156,13 @@ const processContent = (post, siteUrl, options) => {
         }
     }
 
-    // If we have a podcast URL, embed an audio card at the start of the document
-    if (substackPodcastURL) {
-        debug(`Post ${post.data.slug} has podcast episode`);
+    // If we have a podcast URL or voiceover, embed an audio card at the start of the document
+    if (substackPodcastURL || voiceover) {
+        debug(`Post ${post.data.slug} has ${substackPodcastURL ? 'podcast episode' : 'voiceover'}`);
         let cardOpts = {
             env: {dom: new SimpleDom.Document()},
             payload: {
-                src: substackPodcastURL,
+                src: substackPodcastURL || voiceover,
                 title: post.data.title
             }
         };

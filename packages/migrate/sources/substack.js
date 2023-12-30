@@ -131,6 +131,10 @@ const scrapeConfig = {
 
                 return tags;
             }
+        },
+        voiceover: {
+            selector: 'article.post > audio',
+            attr: 'src'
         }
     }
 };
@@ -162,6 +166,10 @@ const postProcessor = (scrapedData, data, options) => {
 
     if (scrapedData?.feature_image?.includes('2Ftwitter%2Fsubscribe-card.jpg')) {
         scrapedData.feature_image = '';
+    }
+
+    if (scrapedData?.voiceover) {
+        scrapedData.voiceover = `${options.url}${scrapedData.voiceover}`;
     }
 
     return scrapedData;

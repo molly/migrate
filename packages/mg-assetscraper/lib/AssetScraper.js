@@ -113,7 +113,8 @@ export default class AssetScraper {
             'twitter_image',
             'thumbnailSrc',
             'customThumbnailSrc',
-            'productImageSrc'
+            'productImageSrc',
+            'voiceover'
         ];
 
         this.AssetCache = new AssetCache(fileCache);
